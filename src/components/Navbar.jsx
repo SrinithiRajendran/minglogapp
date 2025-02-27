@@ -100,6 +100,7 @@ const Navbar = () => {
               <option value="happy">Happy 😄</option>
               <option value="sad">Sad 😞</option>
               <option value="excited">Excited 🤩</option>
+              <option value="funny">Funny 😂</option>
               <option value="angry">Angry 😡</option>
               <option value="normal">Normal 🔘</option>
               <option value="important">Important ⭐</option>

@@ -123,6 +123,7 @@ const AddNotes = () => {
               <option value="Happy">Happy</option>
               <option value="Sad">Sad</option>
               <option value="Excited">Excited</option>
+              <option value="Funny">Funny</option>
               <option value="Angry">Angry</option>
               <option value="Normal">None</option>
               <option value="Important">Important</option>
