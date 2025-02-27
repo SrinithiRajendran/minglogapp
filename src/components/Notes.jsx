@@ -62,7 +62,7 @@ const Notes = () => {
   };
 
   const stateStyles = (isDark) => ({
-    happy: { bg: isDark ? "#c4c04b" : "#FFE66D", emoji: "😄" },
+    happy: { bg: isDark ? "#ffff78" : "#FFE66D", emoji: "😄" },
     sad: { bg: isDark ? "#5bc9cf" : "#a8e5ff", emoji: "😞" },
     angry: { bg: isDark ? "#f26f78" : "#fca7a7", emoji: "😡" },
     excited: { bg: isDark ? "#c465e0" : "#e7b0ff", emoji: "🤩" },
@@ -84,16 +84,18 @@ const Notes = () => {
 
   return (
     <div
-      className={`${isDark ? "bg-[#1d1021]" : "bg-[#ffffff]"} w-full h-screen`}
+      className={`${
+        isDark ? "bg-[#1d1021]" : "bg-[#ffffff]"
+      } w-full h-screen overflow-y-auto`}
     >
       <div className=" w-full  py-4 flex flex-col items-center">
-        <div className="mt-[8vh] px-6 md:px-0">
+        <div className="mt-[8vh] px-6 md:px-0 ">
           <div className="grid grid-cols-1  xs:grid-cols-2 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-5 justify-items-center xs:gap-x-10 sm:px-10 ">
             {filteredNotes.length > 0 ? (
               filteredNotes.map((note) => (
                 <div
                   key={note.id}
-                  className="mt-8 border-1 border-[#e8e8e8] px-4 py-2 shadow-2xl w-[80vw] xs:w-[180px] lg:w-[170px] overflow-hidden flex flex-col items-center cursor-pointer"
+                  className="mt-8 border-1 border-[#e8e8e8] px-4 py-2 shadow-2xl w-[80vw] xs:w-[180px] lg:w-[180px] overflow-hidden flex flex-col items-center cursor-pointer"
                   style={{
                     backgroundColor: getBgColor(note.emotional_state, isDark),
                   }}
