@@ -94,7 +94,7 @@ const Navbar = () => {
             />
             <select
               onClick={handleState}
-              className="px-2 py-1 text-sm rounded-md outline-none mb-2 w-full border cursor-pointer"
+              className="px-2 py-1 text-xs rounded-md outline-none mb-2 w-full border cursor-pointer"
             >
               <option value="">All States</option>
               <option value="happy">Happy 😄</option>
@@ -102,14 +102,14 @@ const Navbar = () => {
               <option value="excited">Excited 🤩</option>
               <option value="funny">Funny 😂</option>
               <option value="angry">Angry 😡</option>
-              <option value="normal">Normal 🔘</option>
+              <option value="normal">None 📝</option>
               <option value="important">Important ⭐</option>
               <option value="bored">Bored 🥱</option>
             </select>
             <input
               onChange={handleDate}
               type="date"
-              className="px-3 cursor-pointer py-1 text-sm rounded-md outline-none mb-2 w-full border"
+              className="px-3 cursor-pointer py-1 text-xs rounded-md outline-none mb-2 w-full border"
             />
             <div className="flex justify-end ">
               <button
