@@ -163,11 +163,11 @@ const Notes = () => {
       </div>
 
       {isModalOpen && selectedNote && (
-        <div className="fixed inset-0 bg-[black]/80 flex justify-center items-center z-50">
+        <div className="fixed inset-0 bg-[black]/80 flex justify-center  items-center z-50">
           <div
             className={` ${
               isDark ? "bg-[black]" : "bg-white"
-            } p-6 rounded-md text-center w-[80%] md:w-[50%] relative`}
+            } p-6 rounded-md text-center w-[85%] md:w-[50%]  max-h-[80vh]  relative`}
           >
             <button
               onClick={closeModal}
@@ -178,14 +178,14 @@ const Notes = () => {
               <IoClose />
             </button>
             <div
-              className={`border-[1px] p-4 m-1 ${
+              className={`border-[1px] p-4 m-1  overflow-y-scroll max-h-[70vh] ${
                 isDark ? "border-[#483e4b]" : "border-[#5e5168]"
               }`}
             >
               <h1
                 className={`${
                   isDark ? "text-[#ecfc5b]" : "text-[#2e1d39]"
-                }    text-1xl md:text-xl mt-4 font-bold mb-2 text-[#4e0956]`}
+                }    text-1xl md:text-xl  font-bold mb-2 text-[#4e0956]`}
               >
                 {selectedNote.title}
               </h1>
@@ -196,14 +196,14 @@ const Notes = () => {
               >
                 {selectedNote.description}
               </p>
-              <p
-                className={` ${
-                  isDark ? "text-[#29b8ff]" : "text-[#2e1d39]"
-                } text-right text-[12px] mt-6 font-bold`}
-              >
-                {selectedNote.date}
-              </p>
             </div>
+            <p
+              className={` ${
+                isDark ? "text-[#29b8ff]" : "text-[#2e1d39]"
+              } text-right text-[12px] font-bold`}
+            >
+              {selectedNote.date}
+            </p>
           </div>
         </div>
       )}
