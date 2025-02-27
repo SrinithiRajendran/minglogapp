@@ -31,6 +31,11 @@ const Navbar = () => {
     setIsFilterVisible(false);
   };
 
+  const handlehome = () => {
+    clearFilters();
+    handleClose();
+  };
+
   return (
     <nav
       className={` ${
@@ -39,14 +44,14 @@ const Navbar = () => {
     >
       <div>
         <h1 className="text-center text-[white] font-distressed text-md md:text-2xl uppercase tracking-wider">
-          <Link to="/" onClick={handleClose}>
+          <Link to="/" onClick={handlehome}>
             Mindlog
           </Link>
         </h1>
       </div>
       <div className="flex ">
         <button className="text-white font-mono text-2xl md:text-[4xl] py-1 px-2">
-          <Link to="/" onClick={handleClose}>
+          <Link to="/" onClick={handlehome}>
             <AiOutlineHome />
           </Link>
         </button>
@@ -59,9 +64,9 @@ const Navbar = () => {
 
         {isFilterVisible && (
           <div
-            className={`absolute top-[15vh] right-0 ${
+            className={`absolute top-[10vh] md:top-[12vh] right-0 ${
               isDark ? "bg-[#635167]" : "bg-[white]"
-            } p-4  shadow-lg w-64`}
+            } p-4  shadow-lg w-64 `}
           >
             <div className="flex justify-between items-center mb-6">
               <h2

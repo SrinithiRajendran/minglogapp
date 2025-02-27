@@ -149,7 +149,7 @@ const Notes = () => {
                 <h1
                   className={`${
                     isDark ? "text-[#c0a1ca]" : "text-[#2b384a]"
-                  }  text-lg font-semibold text-center`}
+                  }  text-lg font-semibold text-center mt-4`}
                 >
                   &quot;No notes match your search!&quot;
                 </h1>
