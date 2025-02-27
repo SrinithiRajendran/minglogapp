@@ -1,12 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router";
+import { ThemeContext } from "../context/ThemeContext";
 
 const UpdateNotes = () => {
+  const { isDark } = useContext(ThemeContext);
   const navigate = useNavigate();
   const location = useLocation();
-  const noteId = location.pathname.split("/")[2]; // Extract the note ID from the URL
+  const noteId = location.pathname.split("/")[2];
 
-  const noteData = location.state?.note || null; // Get note data from location state
+  const noteData = location.state?.note || null;
 
   const [updateNote, setUpdateNote] = useState({
     title: noteData?.title || "",
@@ -15,7 +17,6 @@ const UpdateNotes = () => {
     date: noteData?.date || "",
   });
 
-  // Load note data from localStorage if not provided in location state
   useEffect(() => {
     if (!noteData) {
       const storedNote = JSON.parse(localStorage.getItem("notes"))?.find(
@@ -59,21 +60,35 @@ const UpdateNotes = () => {
       alert("Failed to update note. Please try again.");
     }
   };
+  const labeltextColor = isDark ? "text-[#c2a2ca]" : "text-[#1d1021]";
+  const inputBoxColor = isDark
+    ? "bg-[#453b47] text-[white]"
+    : " text-[#1d1021]";
 
   return (
-    <div className="bg-gray-50 min-h-screen flex flex-col items-center pt-[18vh] pb-10">
+    <div
+      className={` ${
+        isDark ? "bg-[#1d1021]" : "bg-white"
+      } min-h-screen flex flex-col items-center md:pt-[11vh] pt-[8vh] md:pb-10`}
+    >
       <form
-        className="bg-white shadow-md rounded-lg p-6 w-full max-w-md"
+        className={` ${
+          isDark ? "bg-[#1d1021]" : "bg-white"
+        }  shadow-md  p-6 w-full max-w-md`}
         onSubmit={handleSubmit}
       >
-        <h1 className="text-center font-mono font-bold mb-4 text-[#635167]">
+        <h1
+          className={`text-center font-bold mb-4 font-mono ${
+            isDark ? "text-[#c2a2ca]" : "text-[#635167]"
+          }`}
+        >
           Edit Note
         </h1>
         <div className="flex flex-col gap-4">
           <div>
             <label
               htmlFor="title"
-              className="block text-gray-700 font-medium mb-1"
+              className={` ${labeltextColor} block font-medium mb-1`}
             >
               Title
             </label>
@@ -84,32 +99,32 @@ const UpdateNotes = () => {
               value={updateNote.title}
               onChange={handleChange}
               placeholder="Enter a Title"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]"
+              className={` ${inputBoxColor} w-full text-[14px] px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]`}
             />
           </div>
 
           <div>
             <label
               htmlFor="description"
-              className="block text-gray-700 font-medium mb-1"
+              className={` ${labeltextColor} block font-medium mb-1`}
             >
               Note
             </label>
             <textarea
-              rows="5"
+              rows="4"
               id="description"
               name="description"
               value={updateNote.description}
               onChange={handleChange}
               placeholder="Write your notes here..."
-              className="w-full text-[12px] px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]"
+              className={` ${inputBoxColor} w-full text-[14px] px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]`}
             />
           </div>
 
           <div>
             <label
               htmlFor="emotional_state"
-              className="block text-gray-700 font-medium mb-1"
+              className={` ${labeltextColor} block font-medium mb-1`}
             >
               Emotion
             </label>
@@ -118,7 +133,7 @@ const UpdateNotes = () => {
               name="emotional_state"
               value={updateNote.emotional_state}
               onChange={handleChange}
-              className="w-full px-4 text-[12px] py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]"
+              className={` ${inputBoxColor}  w-full px-4 text-[14px] py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]`}
             >
               <option value="Happy">Happy</option>
               <option value="Sad">Sad</option>
@@ -133,7 +148,7 @@ const UpdateNotes = () => {
           <div>
             <label
               htmlFor="date"
-              className="block text-gray-700 font-medium mb-1"
+              className={` ${labeltextColor} block font-medium mb-1`}
             >
               Date
             </label>
@@ -143,22 +158,23 @@ const UpdateNotes = () => {
               name="date"
               value={updateNote.date}
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]"
+              className={` ${inputBoxColor} w-full text-[14px] px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]`}
             />
           </div>
         </div>
 
-        <div className="flex gap-10 text-xs md:text-lg">
+        <div className="flex gap-10 text-xs">
           <button
             type="submit"
-            className="w-full mt-6 bg-[#635167] text-white py-2 px-4 rounded-sm hover:bg-[#3f3649]"
+            className={`w-full mt-6 ${
+              isDark ? "bg-[#635167]" : "bg-[#1d1021]"
+            } text-[white] py-2 px-4 rounded-sm hover:bg-[#3f3649]`}
           >
-            Save
+            Save Note
           </button>
           <button
-            type="button"
             onClick={() => navigate("/")}
-            className="w-full mt-6 bg-[#f91c03] text-white py-2 px-4 rounded-sm hover:bg-[#cd2e0a]"
+            className="w-full mt-6 bg-[#f91c03] text-[white] py-2 px-4 rounded-sm hover:bg-[#cd2e0a]"
           >
             Cancel
           </button>

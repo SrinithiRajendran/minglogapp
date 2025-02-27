@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router";
 import { v4 as uuidv4 } from "uuid";
+import { ThemeContext } from "../context/ThemeContext";
 
 const AddNotes = () => {
   const [note, setNote] = useState({
@@ -10,7 +11,7 @@ const AddNotes = () => {
     emotional_state: "Normal",
     date: "",
   });
-
+  const { isDark } = useContext(ThemeContext);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -32,7 +33,7 @@ const AddNotes = () => {
     try {
       const newNote = {
         ...note,
-        id: uuidv4(), // Generate a new ID
+        id: uuidv4(),
       };
 
       const storedNotes = JSON.parse(localStorage.getItem("notes")) || [];
@@ -47,20 +48,34 @@ const AddNotes = () => {
     }
   };
 
+  const labeltextColor = isDark ? "text-[#c2a2ca]" : "text-[#1d1021]";
+  const inputBoxColor = isDark
+    ? "bg-[#453b47] text-[white]"
+    : " text-[#1d1021]";
+
   return (
-    <div className="bg-gray-50 min-h-screen flex flex-col items-center pt-[18vh] pb-6">
+    <div
+      className={`  ${isDark ? "bg-[#1d1021]" : "bg-white"}
+      min-h-screen flex flex-col items-center md:pt-[11vh] pt-[8vh] md:pb-6`}
+    >
       <form
-        className="bg-white shadow-md rounded-lg p-6 w-full max-w-md"
+        className={` ${
+          isDark ? "bg-[#1d1021]" : "bg-white"
+        }  shadow-lg   p-6 w-full max-w-md`}
         onSubmit={handleSubmit}
       >
-        <h1 className="text-center font-bold mb-4 font-mono text-[#635167]">
+        <h1
+          className={`text-center font-bold mb-4 font-mono ${
+            isDark ? "text-[#c2a2ca]" : "text-[#635167]"
+          }`}
+        >
           Add New Note
         </h1>
         <div className="flex flex-col gap-4">
           <div>
             <label
               htmlFor="title"
-              className="block text-gray-700 font-medium mb-1"
+              className={`block ${labeltextColor} font-medium mb-1`}
             >
               Title
             </label>
@@ -70,31 +85,31 @@ const AddNotes = () => {
               name="title"
               onChange={handleChange}
               placeholder="Enter a Title"
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]"
+              className={` ${inputBoxColor} w-full text-[14px] px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]`}
             />
           </div>
 
           <div>
             <label
               htmlFor="description"
-              className="block text-gray-700 font-medium mb-1"
+              className={`block ${labeltextColor} font-medium mb-1`}
             >
               Note
             </label>
             <textarea
-              rows="5"
+              rows="4"
               id="description"
               name="description"
               onChange={handleChange}
               placeholder="Write your notes here..."
-              className="w-full px-4 text-[12px] py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]"
+              className={` ${inputBoxColor} w-full text-[14px]  px-4  py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]`}
             />
           </div>
 
           <div>
             <label
               htmlFor="emotional_state"
-              className="block text-gray-700 font-medium mb-1"
+              className={`block ${labeltextColor} font-medium mb-1`}
             >
               Emotion
             </label>
@@ -103,7 +118,7 @@ const AddNotes = () => {
               name="emotional_state"
               onChange={handleChange}
               value={note.emotional_state}
-              className="text-[12px] w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]"
+              className={` ${inputBoxColor} text-[14px] w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]`}
             >
               <option value="Happy">Happy</option>
               <option value="Sad">Sad</option>
@@ -118,7 +133,7 @@ const AddNotes = () => {
           <div>
             <label
               htmlFor="date"
-              className="block text-gray-700 font-medium mb-1"
+              className={`block ${labeltextColor} font-medium mb-1`}
             >
               Date
             </label>
@@ -127,14 +142,16 @@ const AddNotes = () => {
               type="date"
               name="date"
               onChange={handleChange}
-              className="w-full px-4 cursor-pointer py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]"
+              className={`${inputBoxColor} w-full px-4 text-[14px]  cursor-pointer py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-[#5a4761]`}
             />
           </div>
         </div>
         <div className="flex gap-10 text-xs">
           <button
             type="submit"
-            className="w-full mt-6 bg-[#635167] text-[white] py-2 px-4 rounded-sm hover:bg-[#3f3649]"
+            className={`w-full mt-6 ${
+              isDark ? "bg-[#635167]" : "bg-[#1d1021]"
+            } text-[white] py-2 px-4 rounded-sm hover:bg-[#3f3649]`}
           >
             Add Note
           </button>

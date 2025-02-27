@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { IoClose } from "react-icons/io5";
 import { MdOutlineDeleteOutline, MdEditSquare } from "react-icons/md";
 import { FilterContext } from "../context/FilterContext";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Notes = () => {
+  const { isDark } = useContext(ThemeContext);
   const [notes, setNotes] = useState([]);
   const [selectedNote, setSelectedNote] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -59,31 +61,41 @@ const Notes = () => {
     setIsDeleteModalOpen(false);
   };
 
-  const stateStyles = {
-    happy: { bg: "#FFE66D", emoji: "😄" },
-    sad: { bg: "#a8e5ff", emoji: "😞" },
-    angry: { bg: "#fca7a7", emoji: "😡" },
-    excited: { bg: "#e7b0ff", emoji: "🤩" },
-    normal: { bg: "#a1ffb0", emoji: "📝" },
-    important: { bg: "#99A8FF", emoji: "⭐" },
-    bored: { bg: "#ccc8c4", emoji: "🥱" },
+  const stateStyles = (isDark) => ({
+    happy: { bg: isDark ? "#c4c04b" : "#FFE66D", emoji: "😄" },
+    sad: { bg: isDark ? "#5bc9cf" : "#a8e5ff", emoji: "😞" },
+    angry: { bg: isDark ? "#f26f78" : "#fca7a7", emoji: "😡" },
+    excited: { bg: isDark ? "#c465e0" : "#e7b0ff", emoji: "🤩" },
+    normal: { bg: isDark ? "#61b560" : "#a1ffb0", emoji: "📝" },
+    important: { bg: isDark ? "#675eb8" : "#99A8FF", emoji: "⭐" },
+    bored: { bg: isDark ? "#cfcfcf" : "#ccc8c4", emoji: "🥱" },
+  });
+
+  const getBgColor = (state, isDark) => {
+    const styles = stateStyles(isDark);
+    return styles[state?.toLowerCase()]?.bg || "#e8e8e8";
   };
 
-  const getBgColor = (state) =>
-    stateStyles[state?.toLowerCase()]?.bg || "bg-gray-200";
-  const getEmoji = (state) => stateStyles[state?.toLowerCase()]?.emoji || "❔";
+  const getEmoji = (state, isDark) => {
+    const styles = stateStyles(isDark);
+    return styles[state?.toLowerCase()]?.emoji || "❔";
+  };
 
   return (
-    <>
-      <div className="bg-[#ffffff] w-full h-full py-4 flex flex-col items-center">
-        <div className="mt-[10vh]">
-          <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 justify-items-center xs:gap-x-10 px-10 pb-4">
+    <div
+      className={`${isDark ? "bg-[#1d1021]" : "bg-[#ffffff]"} w-full h-screen`}
+    >
+      <div className=" w-full  py-4 flex flex-col items-center">
+        <div className="mt-[8vh] px-6 md:px-0">
+          <div className="grid grid-cols-1  xs:grid-cols-2 sm:grid-cols-3  md:grid-cols-4 lg:grid-cols-5 justify-items-center xs:gap-x-10 sm:px-10 ">
             {filteredNotes.length > 0 ? (
               filteredNotes.map((note) => (
                 <div
                   key={note.id}
-                  className="mt-10 border-1 border-[#e8e8e8] px-4 py-2 shadow-xl w-[180px] lg:w-[170px] overflow-hidden flex flex-col items-center cursor-pointer"
-                  style={{ backgroundColor: getBgColor(note.emotional_state) }}
+                  className="mt-8 border-1 border-[#e8e8e8] px-4 py-2 shadow-2xl w-[80%] xs:w-[180px] lg:w-[170px] overflow-hidden flex flex-col items-center cursor-pointer"
+                  style={{
+                    backgroundColor: getBgColor(note.emotional_state, isDark),
+                  }}
                   onClick={() => openModal(note)}
                 >
                   <div className="flex mb-6 justify-between w-full">
@@ -96,7 +108,8 @@ const Notes = () => {
                           e.stopPropagation();
                           openDeleteModal(note.id);
                         }}
-                        className="text-[red] font-mono text-xl"
+                        className="text-[#ff0000]
+                        font-mono text-xl"
                       >
                         <MdOutlineDeleteOutline />
                       </button>
@@ -106,14 +119,18 @@ const Notes = () => {
                         state={{ note }}
                         className="flex"
                       >
-                        <button className="text-[#635167] font-mono text-xl">
+                        <button
+                          className={` ${
+                            isDark ? "text-[#000000]" : "text-[#635167]"
+                          } font-mono text-xl`}
+                        >
                           <MdEditSquare />
                         </button>
                       </Link>
                     </div>
                   </div>
                   <div className="w-full text-left">
-                    <h1 className="text-[#4e0956] text-md md:text-1xl font-semibold">
+                    <h1 className="text-[#4e0956] text-md md:text-1xl font-bold">
                       {note.title}
                     </h1>
                     <p className="text-sm mt-1 mb-4 lg:text-[14px] line-clamp-2 overflow-hidden text-ellipsis">
@@ -121,13 +138,19 @@ const Notes = () => {
                     </p>
                   </div>
                   <div className="w-full flex justify-end mt-auto">
-                    <p className="text-xs text-[#000000]">{note.date}</p>
+                    <p className="text-xs text-[#000000] font-bold">
+                      {note.date}
+                    </p>
                   </div>
                 </div>
               ))
             ) : (
               <div className="fixed inset-0 flex flex-col items-center justify-center z-[-1]">
-                <h1 className="text-[#5e0909] text-lg font-semibold text-center">
+                <h1
+                  className={`${
+                    isDark ? "text-[#edd2f5]" : "text-[#422b4a]"
+                  }  text-lg font-semibold text-center`}
+                >
                   &quot;No notes match your search!&quot;
                 </h1>
               </div>
@@ -138,19 +161,39 @@ const Notes = () => {
 
       {isModalOpen && selectedNote && (
         <div className="fixed inset-0 bg-[black]/80 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-md text-center w-[80%] md:w-[50%] relative">
+          <div
+            className={` ${
+              isDark ? "bg-[black]" : "bg-white"
+            } p-6 rounded-md text-center w-[80%] md:w-[50%] relative`}
+          >
             <button
               onClick={closeModal}
-              className="absolute top-2 right-2 text-xl text-[#2e1d39]"
+              className={`absolute top-2 right-2 text-xl ${
+                isDark ? "text-[#c2a2ca]" : "text-[#2e1d39]"
+              }`}
             >
               <IoClose />
             </button>
 
-            <h1 className="text-1xl md:text-xl mt-4 font-bold mb-2 text-[#4e0956]">
+            <h1
+              className={`${
+                isDark ? "text-[#ecfc5b]" : "text-[#2e1d39]"
+              }    text-1xl md:text-xl mt-4 font-bold mb-2 text-[#4e0956]`}
+            >
               {selectedNote.title}
             </h1>
-            <p className="text-sm md:text-base">{selectedNote.description}</p>
-            <p className="text-right text-[12px] mt-6 font-bold text-[#2d1f34]">
+            <p
+              className={` ${
+                isDark ? "text-[#c2a2ca]" : "text-[#2e1d39]"
+              } text-sm  md:text-base overflow-auto break-words`}
+            >
+              {selectedNote.description}
+            </p>
+            <p
+              className={` ${
+                isDark ? "text-[#29b8ff]" : "text-[#2e1d39]"
+              } text-right text-[12px] mt-6 font-bold`}
+            >
               {selectedNote.date}
             </p>
           </div>
@@ -159,15 +202,25 @@ const Notes = () => {
 
       {isDeleteModalOpen && (
         <div className="fixed inset-0 bg-[black]/80 flex justify-center items-center z-50">
-          <div className="bg-white p-6 rounded-sm text-center w-[80%] md:w-[50%] relative">
+          <div
+            className={`${
+              isDark ? " bg-[black]" : "bg-[white]"
+            } p-6 rounded-sm text-center w-[80%] md:w-[50%] relative`}
+          >
             <button
               onClick={closeDeleteModal}
-              className="absolute top-2 right-2 text-xl text-[#2e1d39]"
+              className={` ${
+                isDark ? "text-[#c2a2ca]" : "text-[#2e1d39]"
+              } absolute top-2 right-2 text-xl text-[#2e1d39]`}
             >
               <IoClose />
             </button>
 
-            <h1 className="text-sm md:text-lg my-4">
+            <h1
+              className={` ${
+                isDark ? "text-[#c2a2ca]" : "text-[#2e1d39]"
+              } text-sm md:text-lg my-4`}
+            >
               Are you sure you want to delete this note?
             </h1>
 
@@ -188,7 +241,7 @@ const Notes = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

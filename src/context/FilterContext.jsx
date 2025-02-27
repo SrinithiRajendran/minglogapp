@@ -8,6 +8,7 @@ export const FilterProvider = ({ children }) => {
   const [searchTitle, setSearchTitle] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [filterDate, setFilterDate] = useState("");
+
   return (
     <FilterContext.Provider
       value={{
