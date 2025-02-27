@@ -92,7 +92,7 @@ const Notes = () => {
               filteredNotes.map((note) => (
                 <div
                   key={note.id}
-                  className="mt-8 border-1 border-[#e8e8e8] px-4 py-2 shadow-2xl w-[80%] xs:w-[180px] lg:w-[170px] overflow-hidden flex flex-col items-center cursor-pointer"
+                  className="mt-8 border-1 border-[#e8e8e8] px-4 py-2 shadow-2xl w-[80vw] xs:w-[180px] lg:w-[170px] overflow-hidden flex flex-col items-center cursor-pointer"
                   style={{
                     backgroundColor: getBgColor(note.emotional_state, isDark),
                   }}
