@@ -145,10 +145,10 @@ const Notes = () => {
                 </div>
               ))
             ) : (
-              <div className="fixed inset-0 flex flex-col items-center justify-center z-[-1]">
+              <div className="absolute top-1/2 flex flex-col items-center justify-center">
                 <h1
                   className={`${
-                    isDark ? "text-[#edd2f5]" : "text-[#422b4a]"
+                    isDark ? "text-[#c0a1ca]" : "text-[#2b384a]"
                   }  text-lg font-semibold text-center`}
                 >
                   &quot;No notes match your search!&quot;
@@ -174,28 +174,33 @@ const Notes = () => {
             >
               <IoClose />
             </button>
-
-            <h1
-              className={`${
-                isDark ? "text-[#ecfc5b]" : "text-[#2e1d39]"
-              }    text-1xl md:text-xl mt-4 font-bold mb-2 text-[#4e0956]`}
+            <div
+              className={`border-2 p-4 m-1 ${
+                isDark ? "border-[#322137]" : "border-[#bcb1c4]"
+              }`}
             >
-              {selectedNote.title}
-            </h1>
-            <p
-              className={` ${
-                isDark ? "text-[#c2a2ca]" : "text-[#2e1d39]"
-              } text-sm  md:text-base overflow-auto break-words`}
-            >
-              {selectedNote.description}
-            </p>
-            <p
-              className={` ${
-                isDark ? "text-[#29b8ff]" : "text-[#2e1d39]"
-              } text-right text-[12px] mt-6 font-bold`}
-            >
-              {selectedNote.date}
-            </p>
+              <h1
+                className={`${
+                  isDark ? "text-[#ecfc5b]" : "text-[#2e1d39]"
+                }    text-1xl md:text-xl mt-4 font-bold mb-2 text-[#4e0956]`}
+              >
+                {selectedNote.title}
+              </h1>
+              <p
+                className={` ${
+                  isDark ? "text-[#c2a2ca]" : "text-[#2e1d39]"
+                } text-sm  md:text-base overflow-auto break-words`}
+              >
+                {selectedNote.description}
+              </p>
+              <p
+                className={` ${
+                  isDark ? "text-[#29b8ff]" : "text-[#2e1d39]"
+                } text-right text-[12px] mt-6 font-bold`}
+              >
+                {selectedNote.date}
+              </p>
+            </div>
           </div>
         </div>
       )}
