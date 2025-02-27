@@ -175,8 +175,8 @@ const Notes = () => {
               <IoClose />
             </button>
             <div
-              className={`border-2 p-4 m-1 ${
-                isDark ? "border-[#322137]" : "border-[#bcb1c4]"
+              className={`border-[1px] p-4 m-1 ${
+                isDark ? "border-[#483e4b]" : "border-[#5e5168]"
               }`}
             >
               <h1
