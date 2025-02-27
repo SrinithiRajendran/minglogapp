@@ -151,7 +151,7 @@ const Notes = () => {
                     isDark ? "text-[#c0a1ca]" : "text-[#2b384a]"
                   }  text-lg font-semibold text-center mt-4`}
                 >
-                  &quot;No notes match your search!&quot;
+                  &quot;No notes&quot;
                 </h1>
               </div>
             )}
