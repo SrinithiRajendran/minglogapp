@@ -102,7 +102,7 @@ const Notes = () => {
                     <div className="text-xl">
                       <p>{getEmoji(note.emotional_state)}</p>
                     </div>
-                    <div className="flex items-center">
+                    <div className="flex items-center gap-1">
                       <button
                         onClick={(e) => {
                           e.stopPropagation();

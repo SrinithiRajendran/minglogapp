@@ -56,7 +56,7 @@ const AddNotes = () => {
   return (
     <div
       className={` ${isDark ? "bg-[#1d1021]" : "bg-white"}
-      min-h-screen flex flex-col items-center pt-[12vh] md:pb-6`}
+       flex flex-col items-center pt-[12vh] md:pb-6`}
     >
       <form
         className={` ${
