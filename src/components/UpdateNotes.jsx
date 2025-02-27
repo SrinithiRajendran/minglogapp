@@ -74,7 +74,7 @@ const UpdateNotes = () => {
       <form
         className={` ${
           isDark ? "bg-[#1d1021]" : "bg-white"
-        }  shadow-md  p-6 w-full max-w-md`}
+        }  md:shadow-lg p-6 w-full max-w-md`}
         onSubmit={handleSubmit}
       >
         <h1

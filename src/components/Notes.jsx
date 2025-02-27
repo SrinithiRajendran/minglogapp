@@ -67,7 +67,7 @@ const Notes = () => {
     angry: { bg: isDark ? "#f26f78" : "#fca7a7", emoji: "😡" },
     excited: { bg: isDark ? "#c465e0" : "#e7b0ff", emoji: "🤩" },
     normal: { bg: isDark ? "#61b560" : "#a1ffb0", emoji: "📝" },
-    important: { bg: isDark ? "#675eb8" : "#99A8FF", emoji: "⭐" },
+    important: { bg: isDark ? "#7c72e8" : "#99A8FF", emoji: "⭐" },
     bored: { bg: isDark ? "#cfcfcf" : "#ccc8c4", emoji: "🥱" },
   });
 
