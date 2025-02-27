@@ -56,12 +56,12 @@ const AddNotes = () => {
   return (
     <div
       className={` ${isDark ? "bg-[#1d1021]" : "bg-white"}
-       flex flex-col items-center pt-[12vh] md:pb-6`}
+        h-screen flex flex-col items-center justify-center absolute inset-0 top-8 z-[-1]`}
     >
       <form
         className={` ${
           isDark ? "bg-[#1d1021]" : "bg-white"
-        }  md:shadow-lg   p-6 w-full max-w-md`}
+        } p-6 w-full max-w-md`}
         onSubmit={handleSubmit}
       >
         <h1
